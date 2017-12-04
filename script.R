@@ -110,15 +110,22 @@ for(i in 1:length(sites)){
   
   if (length(answers) > 0)
   {
-    print(paste("adding rows", length(answers), " index ", i))
-    allAnswers <- c(allAnswers, answers)
-    allQuestions <- c(allQuestions, questions)
+    if(length(answers) != length(questions))
+    {
+      print(paste("error", url))
+    }
+    else
+    {
+      print(paste("adding", length(answers), "rows from", url))
+      allAnswers <- c(allAnswers, answers)
+      allQuestions <- c(allQuestions, questions)
+    }
   }
 }
 
 questionsAndAnswers <- data.table("Frage"=allQuestions, "Antworten"=allAnswers)
 
-
+write.csv(questionsAndAnswers, file="C:/temp/QuestionsAndAnswers.csv")
 
 
 
